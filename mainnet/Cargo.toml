@@ -1,0 +1,8 @@
+[package]
+name = "mainnet"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+snarkvm-console-account = { git = "https://github.com/AleoNet/snarkVM.git", branch = "mainnet" }
+snarkvm-console-network = { git = "https://github.com/AleoNet/snarkVM.git", branch = "mainnet" }

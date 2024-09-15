@@ -1,0 +1,8 @@
+[package]
+name = "testnet2"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+aleo-std = { version = "0.1.8", features = ["cpu", "storage"] }
+snarkvm-dpc = "0.8.0"

@@ -1,0 +1,12 @@
+[package]
+name = "aleo-testnet2-tools"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.89"
+clap = { version = "4.5.17", features = ["derive"] }
+testnet2.workspace = true
+mainnet.workspace = true
+clap-stdin = "0.5.1"
+rand = "0.8.5"

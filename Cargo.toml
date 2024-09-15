@@ -1,0 +1,6 @@
+[workspace]
+members = ["cli", "mainnet", "testnet2"]
+
+[workspace.dependencies]
+mainnet = { path = "mainnet" }
+testnet2 = { path = "testnet2" }
