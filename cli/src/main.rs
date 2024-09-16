@@ -1,3 +1,5 @@
+use std::ops::Deref;
+
 use clap::{Parser, Subcommand};
 use clap_stdin::{FileOrStdin, MaybeStdin};
 use mainnet::{AddressMainnet, PrivateKeyMainnet};
@@ -34,9 +36,12 @@ pub struct FromSigArgs {
 
 #[derive(Parser, Debug)]
 pub struct SignArgs {
-    /// File containing the private key to sign the message with (or `-` for stdin)
+    /// Private key to sign the message with (or `-` for stdin)
     #[clap(short, long)]
-    private_key: FileOrStdin<PrivateKey2>,
+    private_key: Option<MaybeStdin<PrivateKey2>>,
+    /// File containing the private key to sign the message with (or `-` for stdin)
+    #[clap(short = 'f', long)]
+    private_key_file: Option<FileOrStdin<PrivateKey2>>,
     /// Message to sign
     #[clap(short, long)]
     message: String,
@@ -118,9 +123,14 @@ fn main() -> anyhow::Result<()> {
 
         Commands::Sign(SignArgs {
             private_key,
+            private_key_file,
             message,
         }) => {
-            let pk = private_key.contents()?;
+            let pk = match (private_key, private_key_file) {
+                (Some(pk), _) => pk.deref().clone(),
+                (_, Some(pk)) => pk.contents()?,
+                _ => anyhow::bail!("Either a private key or a private key file must be provided"),
+            };
             let sig = pk.sign(message.as_bytes(), &mut rand::thread_rng())?;
             if args.json {
                 println!(r#"{{"signature": "{}"}}"#, sig);
