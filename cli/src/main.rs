@@ -2,7 +2,7 @@ use std::ops::Deref;
 
 use clap::{Parser, Subcommand};
 use clap_stdin::{FileOrStdin, MaybeStdin};
-use mainnet::{AddressMainnet, PrivateKeyMainnet};
+use mainnet::{AddressMainnet, PrivateKeyMainnet, SignatureMainnet};
 use testnet2::{Address2, ComputeKey2, PrivateKey2, Signature2};
 
 /// A collection of tools for working with Aleo testnet2 addresses and signatures
@@ -32,6 +32,12 @@ pub struct FromKeyFileArgs {
 pub struct FromSigArgs {
     /// Signature to derive the address from (or `-` for stdin)
     signature: MaybeStdin<Signature2>,
+}
+
+#[derive(Parser, Debug)]
+pub struct FromMainnetSigArgs {
+    /// Signature to derive the address from (or `-` for stdin)
+    signature: MaybeStdin<SignatureMainnet>,
 }
 
 #[derive(Parser, Debug)]
@@ -70,9 +76,12 @@ pub enum Commands {
     /// Derive a testnet2 and mainnet address from a private key file
     #[clap(alias = "from-private-key-file")]
     FromKeyFile(FromKeyFileArgs),
-    /// Derive a testnet2 and mainnet address from a signature
+    /// Derive a testnet2 address from a testnet2 signature
     #[clap(alias = "from-signature")]
     FromSig(FromSigArgs),
+    /// Derive a mainnet address from a mainnet signature
+    #[clap(alias = "from-mainnet-signature")]
+    FromMainnetSig(FromMainnetSigArgs),
     /// Sign a message with a testnet2 private key
     Sign(SignArgs),
     /// Verify a signature with a testnet2 address and message
@@ -118,6 +127,14 @@ fn main() -> anyhow::Result<()> {
                 println!(r#"{{"testnet2": "{addr}"}}"#);
             } else {
                 println!("testnet2 address: {addr}");
+            }
+        }
+        Commands::FromMainnetSig(FromMainnetSigArgs { signature }) => {
+            let addr = signature.compute_key().to_address();
+            if args.json {
+                println!(r#"{{"mainnet": "{addr}"}}"#);
+            } else {
+                println!("mainnet address: {addr}");
             }
         }
 
