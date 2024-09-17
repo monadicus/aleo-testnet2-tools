@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Aleo Testnet2 Tools</title>
+  </head>
+  <body>
+    <h1>Aleo Testnet2 Tools</h1>
+    <script type="module">
+      import init, * as tools from './pkg/aleo_testnet2_wasm_suite.js';
+      init().then(() => {
+        console.log(tools.testnet2_address('APrivateKey1...'));
+        console.log(tools.mainnet_address('APrivateKey1...'));
+      });
+    </script>
+  </body>
+</html>
