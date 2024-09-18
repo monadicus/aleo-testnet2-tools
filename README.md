@@ -1,5 +1,7 @@
 # Aleo Testnet2 Tools
 
+A website version of these tools is available in the [wasm-suite](./wasm-suite/) directory.
+
 ```bash
 $ cargo run -q
 A collection of tools for working with Aleo testnet2 addresses and signatures

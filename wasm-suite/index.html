@@ -2,15 +2,223 @@
 <html>
   <head>
     <title>Aleo Testnet2 Tools</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.classless.min.css"
+    />
+    <style>
+      .hidden {
+        display: none;
+      }
+      input[readonly] {
+        opacity: 0.6;
+        cursor: copy;
+      }
+      label {
+        font-weight: bold;
+        transition: color 0.2s ease;
+      }
+      label:has(input[aria-invalid='true']) {
+        color: var(--pico-form-element-invalid-border-color);
+      }
+      label:has(input[aria-invalid='true']:focus) {
+        color: var(--pico-form-element-invalid-active-border-color);
+      }
+      label:has(input[aria-invalid='false']) {
+        color: var(--pico-form-element-valid-border-color);
+      }
+      label:has(input[aria-invalid='false']:focus) {
+        color: var(--pico-form-element-valid-active-border-color);
+      }
+    </style>
   </head>
   <body>
-    <h1>Aleo Testnet2 Tools</h1>
-    <script type="module">
-      import init, * as tools from './pkg/aleo_testnet2_wasm_suite.js';
-      init().then(() => {
-        console.log(tools.testnet2_address('APrivateKey1...'));
-        console.log(tools.mainnet_address('APrivateKey1...'));
-      });
-    </script>
+    <main class="hidden" id="wasmWarning">
+      <article>
+        <header>
+          <h3>Unable to load Web Assembly</h3>
+        </header>
+        <p>
+          This page uses
+          <a href="https://webassembly.org/" rel="noopener noreferer"
+            >WebAssembly</a
+          >
+          to run Rust code in the browser. Your browser does not support
+          WebAssembly, or something prevented it from loading.
+        </p>
+      </article>
+    </main>
+    <header>
+      <h1>Aleo Testnet2 Tools</h1>
+      <p>
+        Sign and verify messages using your Testnet2 private key. Compare your
+        Testnet2 address to your Mainnet address.
+      </p>
+      <h3>Table of Contents</h3>
+      <ul>
+        <li><a href="#sign">Sign a Message</a></li>
+        <li><a href="#verify">Verify a Signature</a></li>
+        <li><a href="#derive">Derive Addresses from a Private Key</a></li>
+        <li><a href="#selfhost">Self Host this Site</a></li>
+      </ul>
+    </header>
+    <main>
+      <section>
+        <h2 id="sign">Sign a Message</h2>
+        <p>
+          Enter a private key and a message to generate an Aleo Testnet2
+          compatible signature.
+        </p>
+        <form id="signForm">
+          <label for="sign_privateKey">
+            Testnet2 Private Key
+            <input
+              name="sign_privateKey"
+              autocomplete="off"
+              type="password"
+              placeholder="Testnet2 Private Key"
+              aria-label="Private Key"
+              required
+            />
+          </label>
+          <label for="sign_message">
+            Message to Sign
+            <input
+              name="sign_message"
+              autocomplete="off"
+              type="text"
+              placeholder="Message to Sign"
+              aria-label="Message"
+              required
+            />
+          </label>
+          <label for="sign_signature">
+            Signature
+            <input
+              name="sign_signature"
+              autocomplete="off"
+              type="text"
+              placeholder="Signature"
+              aria-label="Signature"
+              readonly
+            />
+          </label>
+        </form>
+      </section>
+      <section>
+        <h2 id="verify">Verify a Message</h2>
+        <p>
+          Enter an address, a message, and a Testnet2 signature verify
+          authenticity.
+        </p>
+        <form id="verifyForm">
+          <label for="verify_address">
+            Testnet2 Address
+            <input
+              name="verify_address"
+              autocomplete="off"
+              type="text"
+              placeholder="Testnet2 Address"
+              aria-label="Address"
+              required
+            />
+          </label>
+          <label for="verify_message">
+            Message to Verify
+            <input
+              name="verify_message"
+              autocomplete="off"
+              type="text"
+              placeholder="Message to Verify"
+              aria-label="Message"
+              required
+            />
+          </label>
+          <label for="verify_signature">
+            Signature to Verify
+            <input
+              name="verify_signature"
+              autocomplete="off"
+              type="text"
+              placeholder="Signature to Verify"
+              aria-label="Signature"
+              required
+            />
+          </label>
+        </form>
+      </section>
+      <section>
+        <h2 id="derive">Derive Addresses from a Testnet2 Private Key</h2>
+        <p>
+          Enter an address, a message, and a Testnet2 signature verify
+          authenticity.
+        </p>
+        <form id="deriveForm">
+          <label for="derive_privateKey">
+            Testnet2 Private Key
+            <input
+              name="derive_privateKey"
+              autocomplete="off"
+              type="password"
+              placeholder="Testnet2 Private Key"
+              aria-label="Private Key"
+              required
+            />
+          </label>
+          <label for="derive_address2">
+            Derived Testnet2 Address
+            <input
+              name="derive_address2"
+              autocomplete="off"
+              type="text"
+              placeholder="Testnet2 Address"
+              aria-label="Testnet2 Address"
+              readonly
+            />
+          </label>
+          <label for="derive_address">
+            Derived Mainnet Address
+            <input
+              name="derive_address"
+              autocomplete="off"
+              type="text"
+              placeholder="Mainnet Address"
+              aria-label="Mainnet Address"
+              readonly
+            />
+          </label>
+        </form>
+      </section>
+      <section>
+        <h2 id="selfhost">Self Host this Site</h2>
+        <p>
+          The source code for this website is available in the
+          <a
+            rel="noopener noreferer"
+            href="https://github.com/monadicus/aleo-testnet2-tools"
+          >
+            monadicus/aleo-testnet2-tools
+          </a>
+          repository.
+        </p>
+      </section>
+    </main>
+    <footer>
+      <small>
+        <a
+          rel="noopener noreferer"
+          href="https://github.com/monadicus/aleo-testnet2-tools"
+          >Source code</a
+        >
+        &bullet;
+        <a rel="noopener noreferer" href="https://aleo.org/">Aleo</a>
+        &bullet;
+        <a rel="noopener noreferer" href="https://github.com/Aleonet/snarkOS"
+          >snarkOS</a
+        >
+        &bullet; Built with <a href="https://picocss.com">Pico</a>
+      </small>
+    </footer>
+    <script type="module" src="./script.mjs"></script>
   </body>
 </html>

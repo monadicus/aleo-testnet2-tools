@@ -20,6 +20,12 @@ pub fn testnet2_address(private_key: &str) -> Result<String, String> {
         .to_string())
 }
 
+/// Check if a testnet2 address parses successfully
+#[wasm_bindgen]
+pub fn check_testnet2_address(address2: &str) -> bool {
+    address2.parse::<Address2>().is_ok()
+}
+
 /// Generate a mainnet address from a mainnet private key
 #[wasm_bindgen]
 pub fn mainnet_address(private_key: &str) -> Result<String, String> {
