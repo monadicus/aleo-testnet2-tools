@@ -1,6 +1,8 @@
 # Aleo Testnet2 Tools
 
-A website version of these tools is available in the [wasm-suite](./wasm-suite/) directory.
+# [Use These Tools Online](https://monadicus.github.io/aleo-testnet2-tools/)
+
+Or run the website locally from the [wasm-suite](./wasm-suite/) directory.
 
 ```bash
 $ cargo run -q
