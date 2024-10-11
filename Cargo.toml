@@ -1,6 +1,7 @@
 [workspace]
-members = ["cli", "mainnet", "testnet2", "wasm-suite", "wasm-verify"]
+members = ["setup", "cli", "mainnet", "testnet2", "wasm-suite", "wasm-verify"]
 
 [workspace.dependencies]
 mainnet = { path = "mainnet" }
 testnet2 = { path = "testnet2" }
+setup = { path = "setup" }

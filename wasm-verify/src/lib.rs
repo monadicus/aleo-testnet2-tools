@@ -7,6 +7,18 @@ type AddressMainnet = snarkvm_console::account::Address<MainnetV0>;
 type Address2 = snarkvm_dpc::Address<Testnet2>;
 type Signature2 = <Testnet2 as snarkvm_dpc::Network>::AccountSignature;
 
+/// Verify the network of an aleo address. 1 is mainnet, 2 is testnet2
+#[wasm_bindgen]
+pub fn address_verify(address: &str) -> u8 {
+    if address.parse::<AddressMainnet>().is_ok() {
+        1
+    } else if address.parse::<Address2>().is_ok() {
+        2
+    } else {
+        0
+    }
+}
+
 /// Verify a testnet2 signature with a testnet2 address and message
 #[wasm_bindgen]
 pub fn testnet2_verify(address: &str, message: &str, signature: &str) -> Result<bool, String> {

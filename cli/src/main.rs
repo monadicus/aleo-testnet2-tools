@@ -3,6 +3,7 @@ use std::ops::Deref;
 use clap::{Parser, Subcommand};
 use clap_stdin::{FileOrStdin, MaybeStdin};
 use mainnet::{AddressMainnet, PrivateKeyMainnet, SignatureMainnet};
+use rand::thread_rng;
 use testnet2::{Address2, ComputeKey2, PrivateKey2, Signature2};
 
 /// A collection of tools for working with Aleo testnet2 addresses and signatures
@@ -70,6 +71,8 @@ pub struct VerifyArgs {
 
 #[derive(Subcommand, Debug)]
 pub enum Commands {
+    /// Create a testnet2 key
+    New,
     /// Derive a testnet2 and mainnet address from a private key
     #[clap(alias = "from-private-key")]
     FromKey(FromKeyArgs),
@@ -92,6 +95,9 @@ fn main() -> anyhow::Result<()> {
     let args = Args::parse();
 
     match args.command {
+        Commands::New => {
+            println!("{}", PrivateKey2::new(&mut thread_rng()));
+        }
         Commands::FromKeyFile(FromKeyFileArgs { private_key_file }) => {
             let pk = private_key_file.contents()?;
             let pk_mainnet: PrivateKeyMainnet = pk.to_string().parse()?;

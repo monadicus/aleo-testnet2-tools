@@ -1,0 +1,12 @@
+[package]
+name = "setup"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+aleo-std = { version = "0.1.8", features = ["cpu", "storage"] }
+snarkvm-dpc = { git = "https://github.com/AleoHQ/snarkVM.git", rev = "fc997c" }
+snarkvm-algorithms = { git = "https://github.com/AleoHQ/snarkVM.git", rev = "fc997c" }
+
+[dev-dependencies]
+rand = "0.8"

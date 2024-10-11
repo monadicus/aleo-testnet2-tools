@@ -5,6 +5,7 @@
       "dom",
     ],
     "noEmit": true,
+    "allowJs": true,
     "module": "es2015",
     "moduleResolution": "Node",
     "allowSyntheticDefaultImports": true,
