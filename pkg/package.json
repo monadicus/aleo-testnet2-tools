@@ -1,0 +1,15 @@
+{
+  "name": "aleo-testnet2-wasm-suite",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "aleo_testnet2_wasm_suite_bg.wasm",
+    "aleo_testnet2_wasm_suite.js",
+    "aleo_testnet2_wasm_suite.d.ts"
+  ],
+  "main": "aleo_testnet2_wasm_suite.js",
+  "types": "aleo_testnet2_wasm_suite.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
