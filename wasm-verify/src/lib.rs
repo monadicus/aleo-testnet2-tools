@@ -17,6 +17,12 @@ pub fn testnet2_verify(address: &str, message: &str, signature: &str) -> Result<
         .map_err(|e| e.to_string())
 }
 
+/// Verify a testnet2 address
+#[wasm_bindgen]
+pub fn testnet2_verify_addr(address: &str) -> bool {
+    address.parse::<Address2>().is_ok()
+}
+
 /// Verify a mainnet signature with a mainnet address and message
 #[wasm_bindgen]
 pub fn mainnet_verify(address: &str, message: &str, signature: &str) -> Result<bool, String> {
@@ -27,6 +33,12 @@ pub fn mainnet_verify(address: &str, message: &str, signature: &str) -> Result<b
         .parse::<snarkvm_console::account::Signature<MainnetV0>>()
         .map_err(|e| e.to_string())?;
     Ok(signature.verify_bytes(&address, message.as_bytes()))
+}
+
+/// Verify a mainnet address
+#[wasm_bindgen]
+pub fn mainnet_verify_addr(address: &str) -> bool {
+    address.parse::<AddressMainnet>().is_ok()
 }
 
 /// Verify a signature, returning 0 for invalid, 1 for valid mainnet, and 2 for valid testnet2

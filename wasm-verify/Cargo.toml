@@ -1,6 +1,6 @@
 [package]
 name = "aleo-testnet2-wasm-verify"
-version = "0.1.1"
+version = "0.2.0"
 edition = "2021"
 authors = ["Isaac H <gpg@reheatedcake.io>"]
 description = "Aleo Testnet2 signature verification library for the WebAssembly target."

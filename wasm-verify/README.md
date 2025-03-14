@@ -7,7 +7,9 @@ This package contains a few simple functions for verifying aleo Aleo addresses a
 |Signature|Returns|Description|
 |-|-|-|
 |`testnet2_verify(address, message, signature)`|`boolean`|Returns true for valid testnet2 signatures. Throws errors for parsing errors|
+|`testnet2_verify_addr(address)`|`boolean`|Returns true for valid testnet2 addresses.|
 |`mainnet_verify(address, message, signature)`|`boolean`|Returns true for valid mainnet signatures. Throws errors for parsing errors.|
+|`mainnet_verify_addr(address)`|`boolean`|Returns true for valid testnet2 addresses.|
 |`signature(address, message, signature)`|`number`|Returns 0 for invalid, 1 for valid mainnet, and 2 for valid testnet2 signatures.|
 
 ### Compiling from source

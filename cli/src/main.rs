@@ -172,3 +172,11 @@ fn main() -> anyhow::Result<()> {
 
     Ok(())
 }
+
+#[test]
+fn new_testnet2_address() {
+    let pk = PrivateKey2::new(&mut rand::thread_rng());
+    let addr = pk.to_address();
+    println!("testnet2 address: {}", addr);
+    println!("pk: {}", pk);
+}
